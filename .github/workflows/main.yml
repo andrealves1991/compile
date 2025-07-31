@@ -9,10 +9,4 @@ jobs:
     name: Executar comando no CMD do Windows
     steps:
       - name: Verificar o runner
-        run: echo "Rodando em ${{ runner.os }}"
-
-      - name: Executar comando CMD no Windows
-        shell: cmd
-        run: |
-          echo Comando sendo executado no CMD
-          dir
+        run: D:\ && cd protheus\compila && ./appserver.exe -compile -files=D:\protheus\src -includes=D:\protheus\includes -env=compila
