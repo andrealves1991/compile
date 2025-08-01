@@ -1,5 +1,5 @@
-#include 'batata.ch'
+#include 'protheus.ch'
 
 user function arquivo()
-conout('arquivo')
+conout('arquivo 2')
 return
