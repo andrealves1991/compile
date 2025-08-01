@@ -1,4 +1,4 @@
-#include 'protheus.ch'
+#include 'batata.ch'
 
 user function arquivo()
 conout('arquivo')
