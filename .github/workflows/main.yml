@@ -8,5 +8,6 @@ jobs:
     runs-on: self-hosted  # Usa um runner self-hosted
     name: Executar comando no CMD do Windows
     steps:
+      - uses: actions/checkout@v4
       - name: Verificar o runner
         run: cd D:\protheus\compila ; ./appserver.exe -compile -files=D:\protheus\src -includes=D:\protheus\includes -env=compila
