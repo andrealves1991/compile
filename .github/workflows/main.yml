@@ -10,4 +10,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Verificar o runner
-        run: cd D:\protheus\compila ; rm console.log ; ./appserver.exe -compile -files=C:\actions-runner\_work\compile\compile -includes=D:\protheus\includes -env=compila
+        run: cd D:\protheus\compila ; rm console.log ; ./appserver.exe -compile -files=C:\actions-runner\_work\compile\compile -includes=D:\protheus\includes -env=compila -outreport
