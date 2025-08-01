@@ -9,4 +9,4 @@ jobs:
     name: Executar comando no CMD do Windows
     steps:
       - name: Verificar o runner
-        run: D:\ ; cd protheus\compila ; ./appserver.exe -compile -files=D:\protheus\src -includes=D:\protheus\includes -env=compila
+        run: cd D:\protheus\compila ; ./appserver.exe -compile -files=D:\protheus\src -includes=D:\protheus\includes -env=compila
