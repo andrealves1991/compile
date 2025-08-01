@@ -12,4 +12,4 @@ jobs:
       - name: Compila projeto
         run: cd D:\protheus\compila ; rm console.log ; ./appserver.exe -compile -files=C:\actions-runner\_work\compile\compile -includes=D:\protheus\includes -env=compila -outreport
       - name: Verifica se existem erros
-        run : if ((Get-Content -Path D:\protheus\compila\cmdreport\compile_errors.log).Length -gt 0) { exit 1 } else { echo sucesso} ; Get-Content -Path D:\protheus\compila\cmdreport\compile_errors.log
+        run : if ((Get-Content -Path D:\protheus\compila\cmdreport\compile_errors.log).Length -gt 0) { Get-Content -Path D:\protheus\compila\cmdreport\compile_errors.log -and  exit 1 } else { echo sucesso} 
