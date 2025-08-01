@@ -1,4 +1,4 @@
-#include 'protheus.ch'
+#include 'protheus.c'
 
 user function arquivo()
 conout('compilando')
