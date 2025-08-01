@@ -14,4 +14,4 @@ jobs:
       - name: Verifica se existem erros
         run : if ((Get-Content -Path D:\protheus\compila\cmdreport\compile_errors.log).Length -gt 0) { Get-Content -Path D:\protheus\compila\cmdreport\compile_errors.log ;  exit 1 } else { echo Compilado com sucesso} 
       - name: Print GITHUB_BASE_REF
-        run: echo "The base branch of this pull request is:" ${{ github.base_ref }}
+        run: echo "Base Ref: ${{ github.base_ref }}"
