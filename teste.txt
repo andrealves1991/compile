@@ -1,0 +1,80 @@
+Passos para a instalação das fontes utilizadas pelo smartview no oracle linux 9
+dnf update
+dnf install wget curl glibc libicu fontconfig
+wget -O /tmp/noto-sans.zip https://github.com/notofonts/latin-greek-cyrillic/releases/download/NotoSans-v2.014/NotoSans-v2.014.zip
+unzip /tmp/noto-sans.zip -d /tmp/noto-sans
+mkdir /usr/share/fonts/noto-sans
+find /tmp/noto-sans/NotoSans/full -type f -name "*.ttf" -exec cp {} /usr/share/fonts/noto-sans \;
+fc-cache -f -v
+
+Esse não é necessário, usado apenas para validação
+fc-list | grep "NotoSans"
+
+rpm -i https://yum.oracle.com/repo/OracleLinux/OL9/developer/EPEL/x86_64/getPackage/cabextract-1.9.1-3.el9.x86_64.rpm
+dnf --enablerepo=ol9_distro_builder install xorg-x11-font-utils
+rpm -i https://rpmfind.net/linux/sourceforge/m/ms/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
+
+Esse não é necessário, usado apenas para validação
+fc-list | grep "Arial\|Times\|Verdana" 
+
+
+mkdir /usr/sbin/smart-view
+cd /usr/sbin/smart-view
+Para baixar o instalador do agent - smartview
+wget -O /usr/sbin/smart-view/3.9.0.4558336-linux-x64.zip https://smart-view.totvs.app/api/update-manager/releases/treports.agent/linux-x64/latest/download
+
+unzip 3.9.0.4558336-linux-x64.zip
+
+
+
+para startar o serviço:
+/usr/sbin/smart-view/TReports.Agent --urls http://*:7019
+
+criar script com base no de baixo
+https://tdn.totvs.com/pages/releaseview.action?pageId=515676283
+
+
+https://tdn.totvs.com/display/public/framework/Smart+View+-+Protheus+como+Fonte+de+Dados+Nativa
+
+após configurado a integração é necessário acessar o smartview porta 7017 e configurar o conector nativo protheus para baixar os objetos de negocio
+
+version: '3.8'
+
+services:
+  postgres_db:
+    image: postgres:16
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: pgforsmartview
+      POSTGRES_DB: smartview
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - pg_network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: mypassword
+    ports:
+      - "8080:80"
+    networks:
+      - pg_network
+    depends_on:
+      - postgres_db
+
+volumes:
+  postgres_data:
+
+networks:
+  pg_network:
+    driver: bridge
+
+
